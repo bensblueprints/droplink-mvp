@@ -1,0 +1,22 @@
+services:
+  droplink:
+    build: .
+    ports:
+      - "5332:5332"
+    environment:
+      - PORT=5332
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - DATA_DIR=/data
+      - STORAGE_QUOTA_GB=${STORAGE_QUOTA_GB:-10}
+      - BASE_URL=${BASE_URL:-}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - SMTP_FROM=${SMTP_FROM:-}
+    volumes:
+      - droplink-data:/data
+    restart: unless-stopped
+
+volumes:
+  droplink-data:
